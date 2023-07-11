@@ -1,0 +1,23 @@
+# Binaries
+
+*.exe
+*.dll
+*.dylib
+Binariestemp
+tmp
+
+# Teste Binary
+*.test
+
+# Coverage
+
+*.out
+
+#env
+.env
+
+#vendor
+vendor
+
+#sql
+*.db
