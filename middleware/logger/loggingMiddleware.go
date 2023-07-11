@@ -1,13 +1,13 @@
 package logger
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 )
 
 func New(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Printf(r.Method, r.RequestURI, r.Method, r.Host)
+		fmt.Sprintf("| %v | %v | %v |", r.Method, r.RequestURI, r.Host)
 		next.ServeHTTP(w, r)
 	})
 }
