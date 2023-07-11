@@ -31,12 +31,14 @@ func PostTasks(w http.ResponseWriter, rq *http.Request) {
 
 func PutTasks(w http.ResponseWriter, rq *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(map[string]string{
 		"message": "Hello method Put",
 	})
 }
 func DeleteTasks(w http.ResponseWriter, rq *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(map[string]string{
 		"message": "Hello method Delete",
 	})

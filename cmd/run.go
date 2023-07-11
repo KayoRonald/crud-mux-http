@@ -9,11 +9,12 @@ import (
 )
 
 func Run(r *mux.Router) error {
-  r.HandleFunc("/", router.GetTasks).Methods("GET")
-	r.HandleFunc("/{id}", router.GetTasksByID).Methods("GET")
-	r.HandleFunc("/", router.PostTasks).Methods("POST")
-	r.HandleFunc("/{id}", router.PutTasks).Methods("PUT")
-	r.HandleFunc("/{id}", router.DeleteTasks).Methods("DELETE")
+  v1 := r.PathPrefix("/tasks/").Subrouter()
+  v1.HandleFunc("/", router.GetTasks).Methods("GET")
+	v1.HandleFunc("/{id}", router.GetTasksByID).Methods("GET")
+	v1.HandleFunc("/", router.PostTasks).Methods("POST")
+	v1.HandleFunc("/{id}", router.PutTasks).Methods("PUT")
+	v1.HandleFunc("/{id}", router.DeleteTasks).Methods("DELETE")
 
   log.Print("Rodando na porta 8080")
 	http.ListenAndServe(":8080", r)
