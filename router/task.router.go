@@ -43,7 +43,7 @@ func GetTasksDone(w http.ResponseWriter, rq *http.Request) {
 
 func GetTasksByID(w http.ResponseWriter, rq *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
-  tasks := []models.Tasks{}
+  tasks := models.Tasks{}
   id := mux.Vars(rq)["id"]
 	result := database.Database.Db.Where("id = ?", id).First(&tasks)
   if result.RowsAffected == 0 {
@@ -85,10 +85,19 @@ func PutTasks(w http.ResponseWriter, rq *http.Request) {
 		"message": "Hello method Put",
 	})
 }
+
 func DeleteTasks(w http.ResponseWriter, rq *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+  tasks := models.Tasks{}
+  id := mux.Vars(rq)["id"]
+  result := database.Database.Db.Where("id = ?", id).Delete(&tasks)
+  if result.RowsAffected == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(map[string]string{
+			"message": "Nenhuma tasks finalizada.",
+			"status":  "error",
+		})
+	}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]string{
-		"message": "Hello method Delete",
-	})
+	json.NewEncoder(w).Encode(&tasks)
 }
