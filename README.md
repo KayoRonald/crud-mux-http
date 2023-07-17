@@ -39,7 +39,7 @@ A API possui os seguintes endpoints:
 | GET | /tasks | Retorna todos os tasks não feita|
 | GET | /tasks/done/ | Retorna todas as tasks feita |
 | GET | /tasks/:id | Retorna um tasks pelo ID |
-| POST | /tasks | Cria um novo tasks |
+| POST | /tasks/ | Cria um novo tasks |
 | PUT | /tasks/:id | Atualiza um tasks existente |
 | DELETE | /tasks/:id | Deleta um tasks pelo ID |
 
